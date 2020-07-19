@@ -33,13 +33,13 @@ namespace Plugin.myToolTip
         void OnTap(object sender, EventArgs e)
         {
             var control = Control ?? Container;
-
+           
             var text = ToolTipEffect.GetText(Element);
 
             if (!string.IsNullOrEmpty(text))
             {
                 ToolTip.Builder builder;
-                var parentContent = control.RootView;
+                var parentContent = control.RootView;              
 
                 var position = ToolTipEffect.GetPosition(Element);
                 switch (position)
@@ -57,6 +57,7 @@ namespace Plugin.myToolTip
                         builder = new ToolTip.Builder(control.Context, control, parentContent as ViewGroup, text.PadRight(80, ' '), ToolTip.PositionBelow);
                         break;
                 }
+
 
                 builder.SetAlign(ToolTip.AlignLeft);
                 builder.SetBackgroundColor(ToolTipEffect.GetBackgroundColor(Element).ToAndroid());
@@ -93,4 +94,4 @@ namespace Plugin.myToolTip
     }
 
 }
- 
+

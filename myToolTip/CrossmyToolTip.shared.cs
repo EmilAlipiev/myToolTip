@@ -8,18 +8,40 @@ namespace Plugin.myToolTip
     /// <summary>
     /// Cross myToolTip
     /// </summary>
-    public static class ToolTipEffect
-    {
+    public static class ToolTipEffect 
+    {       
 
         public static readonly BindableProperty TextProperty = BindableProperty.CreateAttached("Text", typeof(string), typeof(ToolTipEffect), string.Empty);
 
         public static readonly BindableProperty PositionProperty = BindableProperty.CreateAttached("Position", typeof(ToolTipPosition), typeof(ToolTipEffect), ToolTipPosition.Bottom);
 
-        public static readonly BindableProperty IsVisibleProperty = BindableProperty.CreateAttached("HasTooltip", typeof(bool), typeof(ToolTipEffect), false, propertyChanged: OnIsVisibleChanged);
+        public static readonly BindableProperty IsVisibleProperty = BindableProperty.CreateAttached("IsVisible", typeof(bool), typeof(ToolTipEffect), false, propertyChanged: OnIsVisibleChanged);
 
         public static readonly BindableProperty TextColorProperty = BindableProperty.CreateAttached("TextColor", typeof(Color), typeof(ToolTipEffect), Color.White);
 
         public static readonly BindableProperty BackgroundColorProperty = BindableProperty.CreateAttached("BackgroundColor", typeof(Color), typeof(ToolTipEffect), Color.Black);
+ 
+        /// <summary>
+        /// Overrides TextProperty when it is set. UWP only, IOS and Android not implemented yet
+        /// </summary>
+        public static readonly BindableProperty ContentProperty = BindableProperty.Create("Content", typeof(View), typeof(ToolTipEffect), (object)null, (BindingMode)0, (BindableProperty.ValidateValueDelegate)null, (BindableProperty.BindingPropertyChangedDelegate)null, (BindableProperty.BindingPropertyChangingDelegate)null, (BindableProperty.CoerceValueDelegate)null, (BindableProperty.CreateDefaultValueDelegate)null);
+
+
+        //public static readonly BindableProperty ActionProperty = BindableProperty.CreateAttached("Action", typeof(Action), typeof(ToolTipEffect), Action.OnHover);
+
+        /// <summary>
+        /// Gets or sets the value of the Content. This property can be used to change the content in a tab header.
+        /// </summary>
+
+        public static View GetContent(BindableObject view)
+        {
+            return (View)view.GetValue(ContentProperty);
+        }
+
+        public static void SetContent(BindableObject view, View value)
+        {
+            view.SetValue(ContentProperty, value);
+        }
 
         public static bool GetIsVisible(BindableObject view)
         {
@@ -71,7 +93,17 @@ namespace Plugin.myToolTip
         {
             view.SetValue(PositionProperty, value);
         }
-               
+
+        //public static Action GetAction(BindableObject view)
+        //{
+        //    return (Action)view.GetValue(ActionProperty);
+        //}
+
+        //public static void SetAction(BindableObject view, Action value)
+        //{
+        //    view.SetValue(ActionProperty, value);
+        //}
+
         static void OnIsVisibleChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var view = bindable as View;
@@ -105,6 +137,13 @@ namespace Plugin.myToolTip
         Left,
 
         Top
+    }
+
+    public enum Action
+    {
+        OnHover,
+
+        OnClick,
     }
 
     class ControlTooltipEffect : RoutingEffect

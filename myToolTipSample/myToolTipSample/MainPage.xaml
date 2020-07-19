@@ -26,7 +26,21 @@
                 HorizontalOptions="Center"
                 Text="Show Tooltip"
                 VerticalOptions="StartAndExpand"
-                WidthRequest="150" />
+                WidthRequest="150">
+                <effects:ToolTipEffect.Content>
+                    <Frame
+                        BackgroundColor="Yellow"
+                        BorderColor="Gray"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <Label
+                            HorizontalOptions="FillAndExpand"   FontSize="Small"  
+                            Text="Here is a sample text for this tool tip that can help us later, here is more text to showcase the tooltip bottom"
+                            TextColor="Black"
+                            VerticalOptions="FillAndExpand" />
+                    </Frame>
+                </effects:ToolTipEffect.Content>
+            </Button>
 
             <BoxView
                 x:Name="btn2"
