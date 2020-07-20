@@ -35,6 +35,12 @@ namespace Plugin.myToolTip
                 tooltip.BubbleColor = ToolTipEffect.GetBackgroundColor(Element).ToUIColor();
                 tooltip.ForegroundColor = ToolTipEffect.GetTextColor(Element).ToUIColor();
                 tooltip.Text = new Foundation.NSString(text);
+                var heightArrow = ToolTipEffect.GetArrowHeight(Element);
+                if (heightArrow > 0.0)
+                    tooltip.ArrowHeight = Convert.ToSingle(heightArrow);
+                var widthArrow = ToolTipEffect.GetArrowWidth(Element);
+                if (widthArrow > 0.0)
+                    tooltip.ArrowWidth = Convert.ToSingle(widthArrow);
                 UpdatePosition();
 
                 var window = UIApplication.SharedApplication.KeyWindow;
@@ -109,6 +115,17 @@ namespace Plugin.myToolTip
             {
                 tooltip.Text = new Foundation.NSString(ToolTipEffect.GetText(Element));
             }
+            else if (args.PropertyName == ToolTipEffect.ArrowWidthProperty.PropertyName)
+            {
+                var widthArrow = ToolTipEffect.GetArrowWidth(Element);
+                tooltip.ArrowWidth = Convert.ToSingle(widthArrow);
+            }
+            else if (args.PropertyName == ToolTipEffect.ArrowHeightProperty.PropertyName)
+            {
+                var heightArrow = ToolTipEffect.GetArrowHeight(Element);
+                tooltip.ArrowWidth = Convert.ToSingle(heightArrow);
+            }
+
             else if (args.PropertyName == ToolTipEffect.PositionProperty.PropertyName)
             {
                 UpdatePosition();

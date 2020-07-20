@@ -1,6 +1,6 @@
 ﻿using Android.Views;
 
-using Com.Tomergoldst.Tooltips;
+using Com.Tooltip;
 
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,6 @@ using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-using static Com.Tomergoldst.Tooltips.ToolTipsManager;
 
 [assembly: ResolutionGroupName("Plugin")]
 [assembly: ExportEffect(typeof(Plugin.myToolTip.myToolTipImplementation), nameof(Plugin.myToolTip.ToolTipEffect))]
@@ -20,52 +19,62 @@ namespace Plugin.myToolTip
     /// </summary>
     public class myToolTipImplementation : PlatformEffect
     {
-        ToolTip toolTipView;
-        ToolTipsManager _toolTipsManager;
-        ITipListener listener;
 
+        //ToolTipsManager _toolTipsManager;
+        //ITipListener listener;
+        Tooltip.Builder builder;
         public myToolTipImplementation()
         {
-            listener = new TipListener();
-            _toolTipsManager = new ToolTipsManager(listener);
+            //listener = new TipListener();
+            //_toolTipsManager = new ToolTipsManager(listener);
         }
 
         void OnTap(object sender, EventArgs e)
         {
             var control = Control ?? Container;
-           
+
             var text = ToolTipEffect.GetText(Element);
 
             if (!string.IsNullOrEmpty(text))
             {
-                ToolTip.Builder builder;
-                var parentContent = control.RootView;              
+
+                var parentContent = control.RootView;
 
                 var position = ToolTipEffect.GetPosition(Element);
                 switch (position)
                 {
                     case ToolTipPosition.Top:
-                        builder = new ToolTip.Builder(control.Context, control, parentContent as ViewGroup, text.PadRight(80, ' '), ToolTip.PositionAbove);
+                        builder = new Tooltip.Builder(control, (int)GravityFlags.Top);
                         break;
                     case ToolTipPosition.Left:
-                        builder = new ToolTip.Builder(control.Context, control, parentContent as ViewGroup, text.PadRight(80, ' '), ToolTip.PositionLeftTo);
+                        builder = new Tooltip.Builder(control, (int)GravityFlags.Left);
                         break;
                     case ToolTipPosition.Right:
-                        builder = new ToolTip.Builder(control.Context, control, parentContent as ViewGroup, text.PadRight(80, ' '), ToolTip.PositionRightTo);
+                        builder = new Tooltip.Builder(control, (int)GravityFlags.Right);
                         break;
                     default:
-                        builder = new ToolTip.Builder(control.Context, control, parentContent as ViewGroup, text.PadRight(80, ' '), ToolTip.PositionBelow);
+                        builder = new Tooltip.Builder(control, (int)GravityFlags.Bottom);
                         break;
                 }
 
-
-                builder.SetAlign(ToolTip.AlignLeft);
+                builder.SetText(text);
+                builder.SetCornerRadius(Convert.ToSingle(ToolTipEffect.GetCornerRadius(Element)));
+                builder.SetDismissOnClick(true);
                 builder.SetBackgroundColor(ToolTipEffect.GetBackgroundColor(Element).ToAndroid());
                 builder.SetTextColor(ToolTipEffect.GetTextColor(Element).ToAndroid());
+                var heightArrow = ToolTipEffect.GetArrowHeight(Element);
+                if (heightArrow > 0.0)
+                    builder.SetArrowHeight(Convert.ToSingle(heightArrow));
+                var widthArrow = ToolTipEffect.GetArrowWidth(Element);
+                if (widthArrow > 0.0)
+                    builder.SetArrowWidth(Convert.ToSingle(widthArrow));
+ 
+                builder.SetMargin(Convert.ToSingle(ToolTipEffect.GetMargin(Element)));
+                builder.SetPadding(Convert.ToSingle(ToolTipEffect.GetPadding(Element)));
+                builder.SetCancelable(true);
+                builder.Build().Show();
 
-                toolTipView = builder.Build();
-
-                _toolTipsManager?.Show(toolTipView);
+                //  _toolTipsManager?.Show(toolTipView);
             }
 
         }
@@ -81,16 +90,10 @@ namespace Plugin.myToolTip
         {
             var control = Control ?? Container;
             control.Click -= OnTap;
-            _toolTipsManager.FindAndDismiss(control);
+            builder.Dispose();
         }
 
-        class TipListener : Java.Lang.Object, ITipListener
-        {
-            public void OnTipDismissed(Android.Views.View p0, int p1, bool p2)
-            {
 
-            }
-        }
     }
 
 }

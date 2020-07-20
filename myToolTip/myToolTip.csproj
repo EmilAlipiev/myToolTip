@@ -15,7 +15,7 @@
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-		<Version>1.0.0.0</Version>		
+		<Version>1.0.0.1</Version>		
 		<PackageVersion>1.0.0.0</PackageVersion>
 		<PackOnBuild>true</PackOnBuild>
 		<NeutralLanguage>en</NeutralLanguage>
@@ -30,7 +30,8 @@
 		 
 		<PackageProjectUrl>https://github.com/EmilAlipiev/myToolTip</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/EmilAlipiev/myToolTip</RepositoryUrl>
-		<PackageReleaseNotes></PackageReleaseNotes>
+		<PackageReleaseNotes>Android tablet problem fixed
+Margin, Padding, ArrowHeight, ArrowWidth properties added</PackageReleaseNotes>
 		<PackageIconUrl></PackageIconUrl>
 		<PackageTags>xamarin, windows, ios, android, xamarin.forms, plugin, myToolTip</PackageTags>
 
@@ -89,8 +90,8 @@
 
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
 		<Compile Include="**\*.android.cs" />
-		<PackageReference Include="Xamarin.Android.Tooltips">
-			<Version>1.0.7</Version>
+		<PackageReference Include="XamarinAndroidTooltip">
+			<Version>3.0.0</Version>
 		</PackageReference>
 	</ItemGroup>
 
@@ -112,6 +113,12 @@
 	  </None>
 	</ItemGroup>
 
+	<ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid10.0'">
+	  <PackageReference Include="XamarinAndroidTooltip">
+	    <Version>3.0.0</Version>
+	  </PackageReference>
+	</ItemGroup>
+ 
 	<PropertyGroup>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
