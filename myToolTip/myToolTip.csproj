@@ -15,8 +15,8 @@
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-		<Version>1.0.0.1</Version>		
-		<PackageVersion>1.0.0.0</PackageVersion>
+		<Version>1.0.0.1</Version>
+ 
 		<PackOnBuild>true</PackOnBuild>
 		<NeutralLanguage>en</NeutralLanguage>
 		<LangVersion>default</LangVersion>
@@ -30,8 +30,7 @@
 		 
 		<PackageProjectUrl>https://github.com/EmilAlipiev/myToolTip</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/EmilAlipiev/myToolTip</RepositoryUrl>
-		<PackageReleaseNotes>Android tablet problem fixed
-Margin, Padding, ArrowHeight, ArrowWidth properties added</PackageReleaseNotes>
+		<PackageReleaseNotes>Android tablet problem fixed. Margin, Padding, ArrowHeight, ArrowWidth properties added</PackageReleaseNotes>
 		<PackageIconUrl></PackageIconUrl>
 		<PackageTags>xamarin, windows, ios, android, xamarin.forms, plugin, myToolTip</PackageTags>
 
