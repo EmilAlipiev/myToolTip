@@ -6,8 +6,13 @@ Nuget: https://www.nuget.org/packages/Plugin.myToolTip/
 
 <img src="https://github.com/EmilAlipiev/myToolTip/blob/master/Assets/android.gif" width="540" height="960" />
 
-UWP: implements  Windows.UI.Xaml.ToolTip class
+ UWP: implements  Windows.UI.Xaml.ToolTip class
 
-Android: implements https://github.com/ViHtarb/tooltip
+ Android: implements https://github.com/ViHtarb/tooltip
 
 IOs: implements https://github.com/nmilcoff/EasyTipView 
+
+# USAGE:
+
+Sample xaml is self explained :)
+https://github.com/EmilAlipiev/myToolTip/blob/master/myToolTipSample/myToolTipSample/MainPage.xaml
