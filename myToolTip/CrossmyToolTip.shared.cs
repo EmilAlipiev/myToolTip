@@ -56,7 +56,7 @@ namespace Plugin.myToolTip
         /// </summary>
         public static readonly BindableProperty ContentProperty = BindableProperty.Create("Content", typeof(View), typeof(ToolTipEffect), (object)null, (BindingMode)0, (BindableProperty.ValidateValueDelegate)null, (BindableProperty.BindingPropertyChangedDelegate)null, (BindableProperty.BindingPropertyChangingDelegate)null, (BindableProperty.CoerceValueDelegate)null, (BindableProperty.CreateDefaultValueDelegate)null);
 
-        public static object GetTextSize(BindableObject view)
+        public static double GetTextSize(BindableObject view)
         {
             return (double)view.GetValue(TextSizeProperty);
         }

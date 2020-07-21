@@ -37,9 +37,7 @@ namespace Plugin.myToolTip
 
             if (!string.IsNullOrEmpty(text))
             {
-
-                var parentContent = control.RootView;
-
+ 
                 var position = ToolTipEffect.GetPosition(Element);
                 switch (position)
                 {
@@ -56,7 +54,7 @@ namespace Plugin.myToolTip
                         builder = new Tooltip.Builder(control, (int)GravityFlags.Bottom);
                         break;
                 }
-
+                
                 builder.SetText(text);
                 builder.SetTextSize(Convert.ToSingle(ToolTipEffect.GetCornerRadius(Element)));
             
@@ -76,6 +74,7 @@ namespace Plugin.myToolTip
                 builder.SetMargin(Convert.ToSingle(ToolTipEffect.GetMargin(Element)));
                 builder.SetPadding(Convert.ToSingle(ToolTipEffect.GetPadding(Element)));
                 builder.SetCancelable(true);
+              
                 builder.Build().Show();
 
                 //  _toolTipsManager?.Show(toolTipView);
