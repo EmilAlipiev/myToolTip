@@ -2,9 +2,7 @@
 
 Cross platform Xamarin forms tooltip works for IOS, Android and UWP. 
 
-Nuget: https://www.nuget.org/packages/Plugin.myToolTip/
-
-![Nuget Package Deploy](https://github.com/EmilAlipiev/myToolTip/workflows/Nuget%20Package%20Deploy/badge.svg?branch=master)
+[![Nuget Package Deploy](https://github.com/EmilAlipiev/myToolTip/workflows/Nuget%20Package%20Deploy/badge.svg?branch=master)](https://www.nuget.org/packages/Plugin.myToolTip/)
 
 <img src="https://github.com/EmilAlipiev/myToolTip/blob/master/Assets/android.gif" width="540" height="960" />
 
@@ -18,3 +16,4 @@ IOs: implements https://github.com/nmilcoff/EasyTipView
 
 Sample xaml is self explained :)
 https://github.com/EmilAlipiev/myToolTip/blob/master/myToolTipSample/myToolTipSample/MainPage.xaml
+ 
