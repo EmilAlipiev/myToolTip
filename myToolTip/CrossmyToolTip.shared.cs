@@ -47,18 +47,44 @@ namespace Plugin.myToolTip
         public static readonly BindableProperty ArrowWidthProperty = BindableProperty.CreateAttached("ArrowWidth", typeof(double), typeof(ToolTipEffect), default);
 
         /// <summary>
+        /// Android Only
+        /// </summary>
+        public static readonly BindableProperty TextSizeProperty = BindableProperty.CreateAttached("TextSize", typeof(double), typeof(ToolTipEffect), default);
+
+        /// <summary>
         /// Overrides TextProperty when it is set. UWP only, IOS and Android not implemented yet
         /// </summary>
         public static readonly BindableProperty ContentProperty = BindableProperty.Create("Content", typeof(View), typeof(ToolTipEffect), (object)null, (BindingMode)0, (BindableProperty.ValidateValueDelegate)null, (BindableProperty.BindingPropertyChangedDelegate)null, (BindableProperty.BindingPropertyChangingDelegate)null, (BindableProperty.CoerceValueDelegate)null, (BindableProperty.CreateDefaultValueDelegate)null);
+
+        public static object GetTextSize(BindableObject view)
+        {
+            return (double)view.GetValue(TextSizeProperty);
+        }
+
+        public static void SetTextSize(BindableObject view, double value)
+        {
+            view.SetValue(TextSizeProperty, value);
+        }
 
         public static double GetArrowHeight(BindableObject view)
         {
             return (double)view.GetValue(ArrowHeightProperty);
         }
 
+        public static void SetArrowHeight(BindableObject view, double value)
+        {
+            view.SetValue(ArrowHeightProperty, value);
+        }
+
+
         public static double GetArrowWidth(BindableObject view)
         {
             return (double)view.GetValue(ArrowWidthProperty);
+        }
+
+        public static void SetArrowWidth(BindableObject view, double value)
+        {
+            view.SetValue(ArrowWidthProperty, value);
         }
 
 

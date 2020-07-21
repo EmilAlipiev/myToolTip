@@ -58,7 +58,8 @@ namespace Plugin.myToolTip
                 }
 
                 builder.SetText(text);
-                builder.SetCornerRadius(Convert.ToSingle(ToolTipEffect.GetCornerRadius(Element)));
+                builder.SetTextSize(Convert.ToSingle(ToolTipEffect.GetCornerRadius(Element)));
+            
                 builder.SetDismissOnClick(true);
                 builder.SetBackgroundColor(ToolTipEffect.GetBackgroundColor(Element).ToAndroid());
                 builder.SetTextColor(ToolTipEffect.GetTextColor(Element).ToAndroid());
@@ -68,7 +69,10 @@ namespace Plugin.myToolTip
                 var widthArrow = ToolTipEffect.GetArrowWidth(Element);
                 if (widthArrow > 0.0)
                     builder.SetArrowWidth(Convert.ToSingle(widthArrow));
- 
+
+                var textSize = ToolTipEffect.GetTextSize(Element);
+                if (textSize > 0)
+                    builder.SetCornerRadius(Convert.ToSingle(textSize));
                 builder.SetMargin(Convert.ToSingle(ToolTipEffect.GetMargin(Element)));
                 builder.SetPadding(Convert.ToSingle(ToolTipEffect.GetPadding(Element)));
                 builder.SetCancelable(true);
