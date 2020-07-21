@@ -39,24 +39,28 @@ namespace Plugin.myToolTip
             {
  
                 var position = ToolTipEffect.GetPosition(Element);
+                builder = new Tooltip.Builder(control);
                 switch (position)
                 {
                     case ToolTipPosition.Top:
-                        builder = new Tooltip.Builder(control, (int)GravityFlags.Top);
+                        builder.SetGravity((int)GravityFlags.Top);
                         break;
                     case ToolTipPosition.Left:
-                        builder = new Tooltip.Builder(control, (int)GravityFlags.Left);
+                        builder.SetGravity((int)GravityFlags.Left);
                         break;
                     case ToolTipPosition.Right:
-                        builder = new Tooltip.Builder(control, (int)GravityFlags.Right);
+                        builder.SetGravity((int)GravityFlags.Right);
+                        break;
+                    case ToolTipPosition.Bottom:
+                        builder.SetGravity((int)GravityFlags.Bottom);
                         break;
                     default:
-                        builder = new Tooltip.Builder(control, (int)GravityFlags.Bottom);
+                        builder.SetGravity((int)GravityFlags.NoGravity);
                         break;
                 }
                 
                 builder.SetText(text);
-                builder.SetTextSize(Convert.ToSingle(ToolTipEffect.GetCornerRadius(Element)));
+                builder.SetCornerRadius(Convert.ToSingle(ToolTipEffect.GetCornerRadius(Element)));
             
                 builder.SetDismissOnClick(true);
                 builder.SetBackgroundColor(ToolTipEffect.GetBackgroundColor(Element).ToAndroid());
@@ -70,7 +74,8 @@ namespace Plugin.myToolTip
 
                 var textSize = ToolTipEffect.GetTextSize(Element);
                 if (textSize > 0)
-                    builder.SetCornerRadius(Convert.ToSingle(textSize));
+                    builder.SetTextSize(Convert.ToSingle(textSize));
+
                 builder.SetMargin(Convert.ToSingle(ToolTipEffect.GetMargin(Element)));
                 builder.SetPadding(Convert.ToSingle(ToolTipEffect.GetPadding(Element)));
                 builder.SetCancelable(true);
@@ -93,7 +98,7 @@ namespace Plugin.myToolTip
         {
             var control = Control ?? Container;
             control.Click -= OnTap;
-            builder.Dispose();
+            builder?.Dispose();
         }
 
 

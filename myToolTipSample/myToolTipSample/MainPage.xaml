@@ -8,84 +8,113 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackLayout>
-        <!--  Place new controls here  -->
-        <StackLayout x:Name="mainLayout" Padding="40" Spacing="60">
-            <StackLayout.GestureRecognizers>
-                <TapGestureRecognizer Tapped="Handle_Tapped" />
-            </StackLayout.GestureRecognizers>
+    <!--  Place new controls here  -->
+    <StackLayout
+        x:Name="mainLayout"
+        Padding="40"
+        BackgroundColor="Yellow"
+        HorizontalOptions="FillAndExpand"
+        Orientation="Vertical"
+        VerticalOptions="FillAndExpand">
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Tapped="Handle_Tapped" />
+        </StackLayout.GestureRecognizers>
 
-            <Button
-                x:Name="btn"
-                effects:ToolTipEffect.BackgroundColor="Silver"
-                effects:ToolTipEffect.IsVisible="True"
-                effects:ToolTipEffect.Margin="10"
-                effects:ToolTipEffect.Position="Bottom"
-                effects:ToolTipEffect.Text="Here is a sample text for this tool tip that can help us later, here is more text to showcase the tooltip bottom"
-                effects:ToolTipEffect.TextColor="Teal"
-                BackgroundColor="LightBlue"
-                HorizontalOptions="Center"
-                Text="Show Tooltip"
-                VerticalOptions="StartAndExpand"
-                WidthRequest="150">
-                <effects:ToolTipEffect.Content>
-                    <Frame
-                        BackgroundColor="Yellow"
-                        BorderColor="Gray"
+        <Button
+            x:Name="btn"
+            effects:ToolTipEffect.BackgroundColor="Silver"
+            effects:ToolTipEffect.IsVisible="True"
+            effects:ToolTipEffect.Margin="10"
+            effects:ToolTipEffect.Position="Bottom"
+            effects:ToolTipEffect.Text="Here is a sample text for this tool tip that can help us later, here is more text to showcase the tooltip bottom"
+            effects:ToolTipEffect.TextColor="Teal"
+            BackgroundColor="LightBlue"
+            HorizontalOptions="Center"
+            Text="Buttom Tooltip"
+            VerticalOptions="StartAndExpand"
+            WidthRequest="150">
+            <effects:ToolTipEffect.Content>
+                <Frame
+                    BackgroundColor="Yellow"
+                    BorderColor="Gray"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Label
+                        FontSize="Small"
                         HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
-                        <Label
-                            FontSize="Small"
-                            HorizontalOptions="FillAndExpand"
-                            Text="Here is a sample text for this tool tip that can help us later, here is more text to showcase the tooltip bottom"
-                            TextColor="Black"
-                            VerticalOptions="FillAndExpand" />
-                    </Frame>
-                </effects:ToolTipEffect.Content>
-            </Button>
+                        Text="Here is a sample text for this tool tip that can help us later, here is more text to showcase the tooltip bottom"
+                        TextColor="Black"
+                        VerticalOptions="FillAndExpand" />
+                </Frame>
+            </effects:ToolTipEffect.Content>
+        </Button>
 
-            <BoxView
-                x:Name="btn2"
-                effects:ToolTipEffect.BackgroundColor="Blue"
-                effects:ToolTipEffect.IsVisible="True"
-                effects:ToolTipEffect.Padding="10"
-                effects:ToolTipEffect.CornerRadius="10"
-                effects:ToolTipEffect.Position="Right"
-                effects:ToolTipEffect.Width="10"
-                  effects:ToolTipEffect.Height="20"
-                effects:ToolTipEffect.Text="Here is a sample text for this tool tip that can help us later,&#10; here is more text to showcase the tooltip right"
-                BackgroundColor="Pink"
-                HeightRequest="40"
-                HorizontalOptions="Start"
-                VerticalOptions="CenterAndExpand"
-                WidthRequest="50" />
+        <BoxView
+            x:Name="btn2"
+            effects:ToolTipEffect.BackgroundColor="Blue"
+            effects:ToolTipEffect.CornerRadius="10"
+            effects:ToolTipEffect.IsVisible="True"
+            effects:ToolTipEffect.Padding="10"
+            effects:ToolTipEffect.Position="Right"
+            effects:ToolTipEffect.Text="Here is a sample text for this tool tip that can help us later,&#10; here is more text to showcase the tooltip right"
+            BackgroundColor="Pink"
+            HeightRequest="40"
+            HorizontalOptions="Start"
+            VerticalOptions="CenterAndExpand"
+            WidthRequest="50" />
 
-            <Image
-                x:Name="btn3"
-                effects:ToolTipEffect.BackgroundColor="Green"
-                effects:ToolTipEffect.IsVisible="True"
-                effects:ToolTipEffect.Padding="5"
-                effects:ToolTipEffect.Position="Left"
-                effects:ToolTipEffect.Text="Here is a sample text for this tool tip that can help us later, here is more text to showcase the tooltip left"
-                HeightRequest="100"
-                HorizontalOptions="End"
-                Source="info.png"
-                VerticalOptions="CenterAndExpand"
-                WidthRequest="100" />
+        <Image
+            x:Name="btn3"
+            effects:ToolTipEffect.BackgroundColor="Green"
+            effects:ToolTipEffect.IsVisible="True"
+            effects:ToolTipEffect.Padding="5"
+            effects:ToolTipEffect.Position="Left"
+            effects:ToolTipEffect.Text="Here is a sample text for this tool tip that can help us later, here is more text to showcase the tooltip left"
+            HeightRequest="100"
+            HorizontalOptions="End"
+            Source="info.png"
+            VerticalOptions="CenterAndExpand"
+            WidthRequest="100" />
 
-            <Button
-                x:Name="btn4"
-                effects:ToolTipEffect.BackgroundColor="Navy"
-                effects:ToolTipEffect.IsVisible="True"
-                effects:ToolTipEffect.Padding="3"
-                effects:ToolTipEffect.Position="Top"
-                effects:ToolTipEffect.Text="Here is a sample text for this tool tip that can help us later, here is more text to showcase the tooltip top"
-                BackgroundColor="LightBlue"
-                HorizontalOptions="Center"
-                Text="Show Tooltip"
-                VerticalOptions="EndAndExpand"
-                WidthRequest="150" />
-        </StackLayout>
+        <Button
+            x:Name="btn6"
+            effects:ToolTipEffect.BackgroundColor="Black"
+            effects:ToolTipEffect.IsVisible="True"
+            effects:ToolTipEffect.Padding="3"
+            effects:ToolTipEffect.Text="Here is a sample text for this tool tip that can help us later, here is more text to showcase the tooltip top"
+            BackgroundColor="LightBlue"
+            HorizontalOptions="Center"
+            Text="No Gravity Tooltip"
+            VerticalOptions="Center" />
+
+        <Button
+            x:Name="btn5"
+            effects:ToolTipEffect.BackgroundColor="Navy"
+            effects:ToolTipEffect.IsVisible="True"
+            effects:ToolTipEffect.Padding="3"
+            effects:ToolTipEffect.Position="Left"
+            effects:ToolTipEffect.Text="Here is a sample text for this tool tip that can help us later, here is more text to showcase the tooltip top"
+            BackgroundColor="LightBlue"
+            HorizontalOptions="End"
+            Text="Left Tooltip"
+            VerticalOptions="Center"
+            WidthRequest="150" />
+
+        <Button
+            x:Name="btn4"
+            effects:ToolTipEffect.BackgroundColor="Navy"
+            effects:ToolTipEffect.IsVisible="True"
+            effects:ToolTipEffect.Padding="3"
+            effects:ToolTipEffect.Position="Top"
+            effects:ToolTipEffect.Text="Here is a sample text for this tool tip that can help us later, here is more text to showcase the tooltip top"
+            BackgroundColor="LightBlue"
+            HorizontalOptions="Center"
+            Text="Top Tooltip"
+            VerticalOptions="EndAndExpand"
+            WidthRequest="150" />
+
+
     </StackLayout>
+
 
 </ContentPage>
