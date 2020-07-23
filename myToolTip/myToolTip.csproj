@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<!--Work around so the conditions work below-->
-		<TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid10.0</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid90;MonoAndroid10.0</TargetFrameworks>
 		<TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">$(TargetFrameworks);uap10.0.16299;</TargetFrameworks>
 		<!--Feel free to add as many targets as you need below
     netstandard1.0;netstandard2.0;MonoAndroid90;Xamarin.iOS10;uap10.0.16299;Xamarin.TVOS10;Xamarin.WatchOS10;Xamarin.Mac20;Tizen40
@@ -88,7 +88,10 @@
 	</ItemGroup>
 
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
-		<Compile Include="**\*.android.cs" />		 
+		<Compile Include="**\*.android.cs" />
+		<PackageReference Include="XamarinAndroid.ToolTips">
+			<Version>1.0.2</Version>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
@@ -109,12 +112,7 @@
 	  </None>
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid10.0'">
-	  <PackageReference Include="XamarinAndroid.ToolTips">
-	    <Version>1.0.2</Version>
-	  </PackageReference>
-	</ItemGroup>
-  
+	 
 	<PropertyGroup>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
