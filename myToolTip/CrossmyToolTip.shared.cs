@@ -34,7 +34,7 @@ namespace Plugin.myToolTip
         /// <summary>
         /// Android Only
         /// </summary>
-        public static readonly BindableProperty PaddingProperty = BindableProperty.CreateAttached("Padding", typeof(double), typeof(ToolTipEffect), default);
+        public static readonly BindableProperty PaddingProperty = BindableProperty.CreateAttached("Padding", typeof(int), typeof(ToolTipEffect), default);
 
         /// <summary>
         /// Android, IOS
@@ -109,10 +109,14 @@ namespace Plugin.myToolTip
             return (double)view.GetValue(MarginProperty);
         }
 
-        public static double GetPadding(BindableObject view)
+        public static int GetPadding(BindableObject view)
         {
-            return (double)view.GetValue(PaddingProperty);
-
+            return (int)view.GetValue(PaddingProperty);
+        }
+         
+        public static void SetPadding(BindableObject view, int value)
+        {
+            view.SetValue(PaddingProperty, value);
         }
 
         internal static float GetLineSpacing(Element element)

@@ -77,7 +77,7 @@ namespace Plugin.myToolTip
                     builder.SetTextSize(Convert.ToSingle(textSize));
 
                 builder.SetMargin(Convert.ToSingle(ToolTipEffect.GetMargin(Element)));
-                builder.SetPadding(Convert.ToSingle(ToolTipEffect.GetPadding(Element)));
+                builder.SetPadding( ToolTipEffect.GetPadding(Element));
                 builder.SetCancelable(true);
               
                 builder.Build().Show();
