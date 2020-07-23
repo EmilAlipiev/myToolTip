@@ -68,7 +68,7 @@ namespace Plugin.myToolTip
                 var content = ToolTipEffect.GetContent(Element);
 
                 if (content != null)
-                {                     
+                {
                     var viewToRendererConverter = new ViewToRendererConverter();
                     var frameworkElement = viewToRendererConverter.Convert(content, null, null, null);
                     toolTipContent = frameworkElement;
@@ -78,10 +78,19 @@ namespace Plugin.myToolTip
                     toolTipContent = ToolTipEffect.GetText(Element);
                 }
                 ToolTip toolTip = new ToolTip
-                {
+                {                   
+                    Background = XamarinColorToNative(ToolTipEffect.GetBackgroundColor(Element)),                    
                     Content = toolTipContent ?? "n/a",
                     Placement = GetPlacementMode()
                 };
+
+                var height  = ToolTipEffect.GetHeight(Element);
+                if (height > 0.0)
+                    toolTip.Height = height;
+
+                var width = ToolTipEffect.GetWidth(Element);
+                if (width > 0.0)
+                    toolTip.Width = width;
 
                 ToolTipService.SetToolTip(control, toolTip);
 
