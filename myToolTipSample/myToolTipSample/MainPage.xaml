@@ -5,9 +5,31 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:effects="clr-namespace:Plugin.myToolTip;assembly=Plugin.myToolTip"
+    xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="InfoIconStyle" TargetType="forms:SvgCachedImage">
+                <Setter Property="Source" Value="resource://myToolTipSample.info.svg" />
+                <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+                <Setter Property="Margin" Value="0,16,24,16" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HeightRequest" Value="20" />
+                <Setter Property="WidthRequest" Value="20" />
 
+                <Setter Property="effects:ToolTipEffect.BackgroundColor" Value="#1D1F21" />
+                <Setter Property="effects:ToolTipEffect.CornerRadius" Value="2" />
+                <Setter Property="effects:ToolTipEffect.TextColor" Value="#FFFFFF" />
+                <Setter Property="effects:ToolTipEffect.IsVisible" Value="True" />
+                <Setter Property="effects:ToolTipEffect.Position" Value="Top" />
+                <Setter Property="effects:ToolTipEffect.Padding" Value="10" />
+                <Setter Property="effects:ToolTipEffect.TextSize" Value="16" />
+                <!--<Setter Property="effects:ToolTipEffect.Width" Value="248" />
+        <Setter Property="effects:ToolTipEffect.Height" Value="184" />-->
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <!--  Place new controls here  -->
     <StackLayout
         x:Name="mainLayout"
@@ -75,6 +97,14 @@
             Source="info.png"
             VerticalOptions="CenterAndExpand"
             WidthRequest="100" />
+
+        <forms:SvgCachedImage
+            effects:ToolTipEffect.Text="FFimageLoadingSVG popup Info"
+            HorizontalOptions="Center"
+            Style="{StaticResource InfoIconStyle}"
+            VerticalOptions="CenterAndExpand" />
+
+
 
         <Button
             x:Name="btn6"

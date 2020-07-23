@@ -19,8 +19,9 @@ namespace myToolTipSample.UWP
     {
         public MainPage()
         {
-            this.InitializeComponent();
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
 
+            this.InitializeComponent();
             LoadApplication(new myToolTipSample.App());
         }
     }
