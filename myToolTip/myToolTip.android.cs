@@ -19,15 +19,7 @@ namespace Plugin.myToolTip
     /// </summary>
     public class myToolTipImplementation : PlatformEffect
     {
-
-        //ToolTipsManager _toolTipsManager;
-        //ITipListener listener;
-        Tooltip.Builder builder;
-        public myToolTipImplementation()
-        {
-            //listener = new TipListener();
-            //_toolTipsManager = new ToolTipsManager(listener);
-        }
+        Tooltip.Builder builder;      
 
         void OnTap(object sender, EventArgs e)
         {
