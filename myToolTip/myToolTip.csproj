@@ -15,7 +15,7 @@
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-		<Version>1.0.0.5</Version>
+		<Version>1.0.0.6</Version>
  
 		<PackOnBuild>true</PackOnBuild>
 		<NeutralLanguage>en</NeutralLanguage>
@@ -90,7 +90,7 @@
 	<ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
 		<Compile Include="**\*.android.cs" />
 		<PackageReference Include="XamarinAndroid.ToolTips">
-			<Version>1.0.2</Version>
+			<Version>1.0.3</Version>
 		</PackageReference>
 	</ItemGroup>
 
