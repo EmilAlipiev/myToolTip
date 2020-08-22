@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -88,10 +89,10 @@ namespace Plugin.myToolTip
                 var width = ToolTipEffect.GetWidth(Element);
                 if (width > 0.0)
                     toolTip.Width = width;
-
+                control.Tapped += ToolTipTapped;
+                control.LostFocus += ToolTipLostFocused;
                 ToolTipService.SetToolTip(control, toolTip);
-                toolTip.Tapped += ToolTipTapped;
-                toolTip.LostFocus += ToolTipLostFocused;
+         
                 PlacementMode GetPlacementMode()
                 {
                     switch (ToolTipEffect.GetPosition(Element))
@@ -113,7 +114,7 @@ namespace Plugin.myToolTip
         }
 
         private void ToolTipLostFocused(object sender, RoutedEventArgs e)
-        { 
+        {
             toolTip.IsOpen = false;
         }
 
@@ -131,10 +132,10 @@ namespace Plugin.myToolTip
                 {
                     toolTip.IsOpen = ToolTipEffect.GetIsOpen(Element);
                 }
-            }            
+            }
         }
 
-        
+
 
         protected override void OnDetached()
         {
