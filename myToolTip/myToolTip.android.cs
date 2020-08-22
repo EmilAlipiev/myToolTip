@@ -4,6 +4,7 @@ using Com.Tooltip;
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 using Xamarin.Forms;
@@ -19,9 +20,14 @@ namespace Plugin.myToolTip
     /// </summary>
     public class myToolTipImplementation : PlatformEffect
     {
-        Tooltip.Builder builder;      
+        Tooltip.Builder builder;
 
         void OnTap(object sender, EventArgs e)
+        {
+            GetToolTip();
+        }
+
+        private void GetToolTip()
         {
             var control = Control ?? Container;
 
@@ -29,7 +35,7 @@ namespace Plugin.myToolTip
 
             if (!string.IsNullOrEmpty(text))
             {
- 
+
                 var position = ToolTipEffect.GetPosition(Element);
                 builder = new Tooltip.Builder(control);
                 switch (position)
@@ -50,10 +56,10 @@ namespace Plugin.myToolTip
                         builder.SetGravity((int)GravityFlags.NoGravity);
                         break;
                 }
-                
+
                 builder.SetText(text);
                 builder.SetCornerRadius(Convert.ToSingle(ToolTipEffect.GetCornerRadius(Element)));
-            
+
                 builder.SetDismissOnClick(true);
                 builder.SetBackgroundColor(ToolTipEffect.GetBackgroundColor(Element).ToAndroid());
                 builder.SetTextColor(ToolTipEffect.GetTextColor(Element).ToAndroid());
@@ -69,20 +75,21 @@ namespace Plugin.myToolTip
                     builder.SetTextSize(Convert.ToSingle(textSize));
 
                 builder.SetMargin(Convert.ToSingle(ToolTipEffect.GetMargin(Element)));
-                builder.SetPadding( ToolTipEffect.GetPadding(Element));
+                builder.SetPadding(ToolTipEffect.GetPadding(Element));
                 builder.SetCancelable(true);
-              
+
                 builder.Build().Show();
 
                 //  _toolTipsManager?.Show(toolTipView);
             }
-
         }
 
         protected override void OnAttached()
         {
             var control = Control ?? Container;
+
             control.Click += OnTap;
+
         }
 
 
@@ -93,6 +100,17 @@ namespace Plugin.myToolTip
             builder?.Dispose();
         }
 
+        protected override void OnElementPropertyChanged(PropertyChangedEventArgs args)
+        {
+            base.OnElementPropertyChanged(args);
+            if (args.PropertyName == "IsOpen")
+            {
+                if (ToolTipEffect.GetIsOpen(Element))
+                {
+                    GetToolTip();
+                }
+            }
+        }
 
     }
 

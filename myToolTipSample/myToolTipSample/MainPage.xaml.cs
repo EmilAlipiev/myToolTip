@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Plugin.myToolTip;
 
 using Xamarin.Forms;
 
@@ -22,6 +23,12 @@ namespace myToolTipSample
         private void Handle_Tapped(object sender, EventArgs e)
         {
 
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ToolTipEffect.SetIsOpen(IconInfo, true);
         }
     }
 }

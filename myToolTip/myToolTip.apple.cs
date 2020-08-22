@@ -26,6 +26,11 @@ namespace Plugin.myToolTip
 
         void OnTap(object sender, EventArgs e)
         {
+             GetToolTip();
+        }
+
+        void GetToolTip()
+        {
             var control = Control ?? Container;
 
             var text = ToolTipEffect.GetText(Element);
@@ -53,7 +58,6 @@ namespace Plugin.myToolTip
 
                 tooltip?.Show(control, vc.View, true);
             }
-
         }
 
         void OnDismiss(object sender, EventArgs e)
@@ -130,6 +134,13 @@ namespace Plugin.myToolTip
             {
                 UpdatePosition();
             }
+            if (args.PropertyName == ToolTipEffect.IsOpenProperty.PropertyName)
+            {
+                if (ToolTipEffect.GetIsOpen(Element))
+                {
+                    GetToolTip();
+                }
+            }
         }
 
         void UpdatePosition()
@@ -151,5 +162,6 @@ namespace Plugin.myToolTip
                     break;
             }
         }
+         
     }
 }

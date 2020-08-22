@@ -15,13 +15,48 @@ namespace Plugin.myToolTip
 
         public static readonly BindableProperty PositionProperty = BindableProperty.CreateAttached("Position", typeof(ToolTipPosition), typeof(ToolTipEffect), ToolTipPosition.Bottom);
 
-        public static readonly BindableProperty IsVisibleProperty = BindableProperty.CreateAttached("IsVisible", typeof(bool), typeof(ToolTipEffect), false, propertyChanged: OnIsVisibleChanged);
+        public static readonly BindableProperty IsTapAttachedProperty = BindableProperty.CreateAttached("IsTapAttached", typeof(bool), typeof(ToolTipEffect), false, propertyChanged: OnIsTapAttachedChanged);
 
         public static readonly BindableProperty TextColorProperty = BindableProperty.CreateAttached("TextColor", typeof(Color), typeof(ToolTipEffect), Color.Black);
 
         public static readonly BindableProperty BackgroundColorProperty = BindableProperty.CreateAttached("BackgroundColor", typeof(Color), typeof(ToolTipEffect), Color.White);
 
-     
+        public static readonly BindableProperty IsOpenProperty = BindableProperty.CreateAttached("IsOpen", typeof(bool), typeof(ToolTipEffect), false, propertyChanged: IsOpenChanged);
+
+        private static void IsOpenChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var view = bindable as View;
+            if (view == null)
+            {
+                return;
+            }
+
+            bool isOpen = (bool)newValue;
+            if (isOpen)
+            {
+                view.Effects.Add(new ControlTooltipEffect());
+            }
+            else
+            {
+                var toRemove = view.Effects.FirstOrDefault(e => e is ControlTooltipEffect);
+                if (toRemove != null)
+                {
+                    view.Effects.Remove(toRemove);
+                }
+            }
+        }
+
+        public static bool GetIsOpen(BindableObject view)
+        {
+            return (bool)view.GetValue(IsOpenProperty);
+        }
+
+        public static void SetIsOpen(BindableObject view, bool value)
+        {
+            view.SetValue(IsOpenProperty, value);
+        }
+
+
         #region AndroidIOSOnly
 
         /// <summary>
@@ -37,7 +72,7 @@ namespace Plugin.myToolTip
         /// <summary>
         /// Android, IOS
         /// </summary>
-        public static readonly BindableProperty ArrowWidthProperty = BindableProperty.CreateAttached("ArrowWidth", typeof(double), typeof(ToolTipEffect), default); 
+        public static readonly BindableProperty ArrowWidthProperty = BindableProperty.CreateAttached("ArrowWidth", typeof(double), typeof(ToolTipEffect), default);
         #endregion
 
         #region AndroidOnly
@@ -73,7 +108,7 @@ namespace Plugin.myToolTip
         /// <summary>
         /// Sets the Width of the toolTip. UWP only, IOS and Android not implemented yet
         /// </summary>
-        public static readonly BindableProperty WidthProperty = BindableProperty.CreateAttached("Width", typeof(double), typeof(ToolTipEffect), default); 
+        public static readonly BindableProperty WidthProperty = BindableProperty.CreateAttached("Width", typeof(double), typeof(ToolTipEffect), default);
 
         #endregion
 
@@ -81,7 +116,6 @@ namespace Plugin.myToolTip
         {
             return (double)view.GetValue(HeightProperty);
         }
-
         public static double GetWidth(BindableObject view)
         {
             return (double)view.GetValue(WidthProperty);
@@ -116,7 +150,7 @@ namespace Plugin.myToolTip
         {
             view.SetValue(ArrowHeightProperty, value);
         }
- 
+
         public static double GetArrowWidth(BindableObject view)
         {
             return (double)view.GetValue(ArrowWidthProperty);
@@ -174,14 +208,14 @@ namespace Plugin.myToolTip
             view.SetValue(ContentProperty, value);
         }
 
-        public static bool GetIsVisible(BindableObject view)
+        public static bool GetIsTapAttached(BindableObject view)
         {
-            return (bool)view.GetValue(IsVisibleProperty);
+            return (bool)view.GetValue(IsTapAttachedProperty);
         }
 
-        public static void SetIsVisible(BindableObject view, bool value)
+        public static void SetIsTapAttached(BindableObject view, bool value)
         {
-            view.SetValue(IsVisibleProperty, value);
+            view.SetValue(IsTapAttachedProperty, value);
         }
 
         public static string GetText(BindableObject view)
@@ -235,7 +269,7 @@ namespace Plugin.myToolTip
         //    view.SetValue(ActionProperty, value);
         //}
 
-        static void OnIsVisibleChanged(BindableObject bindable, object oldValue, object newValue)
+        static void OnIsTapAttachedChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var view = bindable as View;
             if (view == null)

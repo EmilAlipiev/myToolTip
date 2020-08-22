@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics.Tracing;
-
-using Windows.UI.Input;
+﻿using System.ComponentModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -57,7 +54,7 @@ namespace Plugin.myToolTip
         //    codePopup.IsOpen = true;
 
         //}
-
+        ToolTip toolTip;
         private void ShowToolTip()
         {
             var control = Control ?? Container;
@@ -77,14 +74,14 @@ namespace Plugin.myToolTip
                 {
                     toolTipContent = ToolTipEffect.GetText(Element);
                 }
-                ToolTip toolTip = new ToolTip
-                {                   
-                    Background = XamarinColorToNative(ToolTipEffect.GetBackgroundColor(Element)),                    
+                toolTip = new ToolTip
+                {
+                    Background = XamarinColorToNative(ToolTipEffect.GetBackgroundColor(Element)),
                     Content = toolTipContent ?? "n/a",
                     Placement = GetPlacementMode()
                 };
 
-                var height  = ToolTipEffect.GetHeight(Element);
+                var height = ToolTipEffect.GetHeight(Element);
                 if (height > 0.0)
                     toolTip.Height = height;
 
@@ -93,7 +90,8 @@ namespace Plugin.myToolTip
                     toolTip.Width = width;
 
                 ToolTipService.SetToolTip(control, toolTip);
-
+                toolTip.Tapped += ToolTipTapped;
+                toolTip.LostFocus += ToolTipLostFocused;
                 PlacementMode GetPlacementMode()
                 {
                     switch (ToolTipEffect.GetPosition(Element))
@@ -113,6 +111,30 @@ namespace Plugin.myToolTip
 
             }
         }
+
+        private void ToolTipLostFocused(object sender, RoutedEventArgs e)
+        { 
+            toolTip.IsOpen = false;
+        }
+
+        private void ToolTipTapped(object sender, TappedRoutedEventArgs e)
+        {
+            toolTip.IsOpen = false;
+        }
+
+        protected override void OnElementPropertyChanged(PropertyChangedEventArgs args)
+        {
+            base.OnElementPropertyChanged(args);
+            if (args.PropertyName == "IsOpen")
+            {
+                if (toolTip != null)
+                {
+                    toolTip.IsOpen = ToolTipEffect.GetIsOpen(Element);
+                }
+            }            
+        }
+
+        
 
         protected override void OnDetached()
         {

@@ -21,7 +21,7 @@
                 <Setter Property="effects:ToolTipEffect.BackgroundColor" Value="#1D1F21" />
                 <Setter Property="effects:ToolTipEffect.CornerRadius" Value="2" />
                 <Setter Property="effects:ToolTipEffect.TextColor" Value="#FFFFFF" />
-                <Setter Property="effects:ToolTipEffect.IsVisible" Value="True" />
+                <Setter Property="effects:ToolTipEffect.IsTapAttached" Value="True" />
                 <Setter Property="effects:ToolTipEffect.Position" Value="Top" />
                 <Setter Property="effects:ToolTipEffect.Padding" Value="10" />
                 <Setter Property="effects:ToolTipEffect.TextSize" Value="16" />
@@ -45,7 +45,7 @@
         <Button
             x:Name="btn"
             effects:ToolTipEffect.BackgroundColor="Silver"
-            effects:ToolTipEffect.IsVisible="True"
+            effects:ToolTipEffect.IsTapAttached="True"
             effects:ToolTipEffect.Margin="10"
             effects:ToolTipEffect.Position="Bottom"
             effects:ToolTipEffect.Text="Here is a sample text for this tool tip that can help us later, here is more text to showcase the tooltip bottom"
@@ -75,7 +75,7 @@
             x:Name="btn2"
             effects:ToolTipEffect.BackgroundColor="Blue"
             effects:ToolTipEffect.CornerRadius="10"
-            effects:ToolTipEffect.IsVisible="True"
+            effects:ToolTipEffect.IsTapAttached="True"
             effects:ToolTipEffect.Padding="10"
             effects:ToolTipEffect.Position="Right"
             effects:ToolTipEffect.Text="Here is a sample text for this tool tip that can help us later,&#10; here is more text to showcase the tooltip right"
@@ -88,7 +88,7 @@
         <Image
             x:Name="btn3"
             effects:ToolTipEffect.BackgroundColor="Green"
-            effects:ToolTipEffect.IsVisible="True"
+            effects:ToolTipEffect.IsTapAttached="True"
             effects:ToolTipEffect.Padding="5"
             effects:ToolTipEffect.Position="Left"
             effects:ToolTipEffect.Text="Here is a sample text for this tool tip that can help us later, here is more text to showcase the tooltip left"
@@ -99,6 +99,7 @@
             WidthRequest="100" />
 
         <forms:SvgCachedImage
+            x:Name="IconInfo"
             effects:ToolTipEffect.Text="FFimageLoadingSVG popup Info"
             HorizontalOptions="Center"
             Style="{StaticResource InfoIconStyle}"
@@ -109,7 +110,7 @@
         <Button
             x:Name="btn6"
             effects:ToolTipEffect.BackgroundColor="Black"
-            effects:ToolTipEffect.IsVisible="True"
+            effects:ToolTipEffect.IsTapAttached="True"
             effects:ToolTipEffect.Padding="3"
             effects:ToolTipEffect.Text="Here is a sample text for this tool tip that can help us later, here is more text to showcase the tooltip top"
             BackgroundColor="LightBlue"
@@ -120,7 +121,7 @@
         <Button
             x:Name="btn5"
             effects:ToolTipEffect.BackgroundColor="Navy"
-            effects:ToolTipEffect.IsVisible="True"
+            effects:ToolTipEffect.IsTapAttached="True"
             effects:ToolTipEffect.Padding="3"
             effects:ToolTipEffect.Position="Left"
             effects:ToolTipEffect.Text="Here is a sample text for this tool tip that can help us later, here is more text to showcase the tooltip top"
@@ -133,7 +134,7 @@
         <Button
             x:Name="btn4"
             effects:ToolTipEffect.BackgroundColor="Navy"
-            effects:ToolTipEffect.IsVisible="True"
+            effects:ToolTipEffect.IsTapAttached="True"
             effects:ToolTipEffect.Padding="3"
             effects:ToolTipEffect.Position="Top"
             effects:ToolTipEffect.Text="Here is a sample text for this tool tip that can help us later, here is more text to showcase the tooltip top"
