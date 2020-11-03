@@ -15,7 +15,7 @@
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-		<Version>1.0.0.6</Version>
+		<Version>1.0.0.7</Version>
  
 		<PackOnBuild>true</PackOnBuild>
 		<NeutralLanguage>en</NeutralLanguage>
@@ -30,7 +30,7 @@
 		 
 		<PackageProjectUrl>https://github.com/EmilAlipiev/myToolTip</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/EmilAlipiev/myToolTip</RepositoryUrl>
-		<PackageReleaseNotes>UWP width height backgroundcolor added</PackageReleaseNotes>
+		<PackageReleaseNotes>Text property changed binding fixed for UWP and Android</PackageReleaseNotes>
 		<PackageIconUrl></PackageIconUrl>
 		<PackageTags>xamarin, windows, ios, android, xamarin.forms, plugin, myToolTip</PackageTags>
 

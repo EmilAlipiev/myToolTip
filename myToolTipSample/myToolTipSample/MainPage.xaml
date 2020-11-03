@@ -99,7 +99,8 @@
             WidthRequest="100" />
 
         <forms:SvgCachedImage
-            effects:ToolTipEffect.Text="FFimageLoadingSVG popup Info"
+            x:Name="IconInfo"
+            effects:ToolTipEffect.Text="{Binding Tooltip}"
             HorizontalOptions="Center"
             Style="{StaticResource InfoIconStyle}"
             VerticalOptions="CenterAndExpand" />
