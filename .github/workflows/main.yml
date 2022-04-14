@@ -6,11 +6,11 @@ on:
      - master
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2     
     - name: Setup Nuget.exe
-      uses: NuGet/setup-nuget@v1.0.5
+      uses: NuGet/setup-nuget@v1.0.6
     - name: Restore Nuget
       run: nuget restore  myToolTip/myToolTip.csproj
     - name: Setup MSBuild.exe
