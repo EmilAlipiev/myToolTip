@@ -6,15 +6,15 @@ on:
      - master
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2019
     steps:
     - uses: actions/checkout@v2     
     - name: Setup Nuget.exe
-      uses: warrenbuckley/Setup-Nuget@v1
+      uses: NuGet/setup-nuget@v1.0.5
     - name: Restore Nuget
       run: nuget restore  myToolTip/myToolTip.csproj
     - name: Setup MSBuild.exe
-      uses: warrenbuckley/Setup-MSBuild@v1
+      uses: microsoft/setup-msbuild@v1
     - name: Build with dotnet
       run: msbuild myToolTip/myToolTip.csproj -property:Configuration=Release
     - name: Push Package to nuget
