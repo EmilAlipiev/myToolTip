@@ -1,27 +1,21 @@
-﻿using System;
-using System.Linq;
-
-using Xamarin.Forms;
-
-namespace Plugin.myToolTip
+﻿namespace Plugin.myToolTip
 {
     /// <summary>
     /// Cross myToolTip
     /// </summary>
-    public static class ToolTipEffect
+    public class ToolTipEffect : RoutingEffect
     {
-
         public static readonly BindableProperty TextProperty = BindableProperty.CreateAttached("Text", typeof(string), typeof(ToolTipEffect), string.Empty);
 
         public static readonly BindableProperty PositionProperty = BindableProperty.CreateAttached("Position", typeof(ToolTipPosition), typeof(ToolTipEffect), ToolTipPosition.Bottom);
 
         public static readonly BindableProperty IsVisibleProperty = BindableProperty.CreateAttached("IsVisible", typeof(bool), typeof(ToolTipEffect), false, propertyChanged: OnIsVisibleChanged);
 
-        public static readonly BindableProperty TextColorProperty = BindableProperty.CreateAttached("TextColor", typeof(Color), typeof(ToolTipEffect), Color.Black);
+        public static readonly BindableProperty TextColorProperty = BindableProperty.CreateAttached("TextColor", typeof(Color), typeof(ToolTipEffect), Colors.Black);
 
-        public static readonly BindableProperty BackgroundColorProperty = BindableProperty.CreateAttached("BackgroundColor", typeof(Color), typeof(ToolTipEffect), Color.White);
+        public static readonly BindableProperty BackgroundColorProperty = BindableProperty.CreateAttached("BackgroundColor", typeof(Color), typeof(ToolTipEffect), Colors.White);
 
-     
+
         #region AndroidIOSOnly
 
         /// <summary>
@@ -37,7 +31,8 @@ namespace Plugin.myToolTip
         /// <summary>
         /// Android, IOS
         /// </summary>
-        public static readonly BindableProperty ArrowWidthProperty = BindableProperty.CreateAttached("ArrowWidth", typeof(double), typeof(ToolTipEffect), default); 
+        public static readonly BindableProperty ArrowWidthProperty = BindableProperty.CreateAttached("ArrowWidth", typeof(double), typeof(ToolTipEffect), default);
+
         #endregion
 
         #region AndroidOnly
@@ -56,13 +51,16 @@ namespace Plugin.myToolTip
         /// Android Only
         /// </summary>
         public static readonly BindableProperty MarginProperty = BindableProperty.CreateAttached("Margin", typeof(double), typeof(ToolTipEffect), default);
+
         #endregion
 
         #region UWPOnly
+
         /// <summary>
         /// Overrides TextProperty when it is set. UWP only, IOS and Android not implemented yet
         /// </summary>
-        public static readonly BindableProperty ContentProperty = BindableProperty.Create("Content", typeof(View), typeof(ToolTipEffect), (object)null, (BindingMode)0, (BindableProperty.ValidateValueDelegate)null, (BindableProperty.BindingPropertyChangedDelegate)null, (BindableProperty.BindingPropertyChangingDelegate)null, (BindableProperty.CoerceValueDelegate)null, (BindableProperty.CreateDefaultValueDelegate)null);
+        public static readonly BindableProperty ContentProperty = BindableProperty.Create("Content", typeof(View), typeof(ToolTipEffect), (object)null, (BindingMode)0, (BindableProperty.ValidateValueDelegate)null,
+            (BindableProperty.BindingPropertyChangedDelegate)null, (BindableProperty.BindingPropertyChangingDelegate)null, (BindableProperty.CoerceValueDelegate)null, (BindableProperty.CreateDefaultValueDelegate)null);
 
 
         /// <summary>
@@ -73,7 +71,7 @@ namespace Plugin.myToolTip
         /// <summary>
         /// Sets the Width of the toolTip. UWP only, IOS and Android not implemented yet
         /// </summary>
-        public static readonly BindableProperty WidthProperty = BindableProperty.CreateAttached("Width", typeof(double), typeof(ToolTipEffect), default); 
+        public static readonly BindableProperty WidthProperty = BindableProperty.CreateAttached("Width", typeof(double), typeof(ToolTipEffect), default);
 
         #endregion
 
@@ -116,7 +114,7 @@ namespace Plugin.myToolTip
         {
             view.SetValue(ArrowHeightProperty, value);
         }
- 
+
         public static double GetArrowWidth(BindableObject view)
         {
             return (double)view.GetValue(ArrowWidthProperty);
@@ -133,7 +131,6 @@ namespace Plugin.myToolTip
         /// <summary>
         /// Gets or sets the value of the Content. This property can be used to change the content in a tab header.
         /// </summary>
-
         public static View GetContent(BindableObject view)
         {
             return (View)view.GetValue(ContentProperty);
@@ -237,20 +234,19 @@ namespace Plugin.myToolTip
 
         static void OnIsVisibleChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var view = bindable as View;
-            if (view == null)
+            if (bindable is not View view)
             {
                 return;
             }
 
-            bool isVisible = (bool)newValue;
+            var isVisible = (bool)newValue;
             if (isVisible)
             {
-                view.Effects.Add(new ControlTooltipEffect());
+                view.Effects.Add(new ToolTipEffect());
             }
             else
             {
-                var toRemove = view.Effects.FirstOrDefault(e => e is ControlTooltipEffect);
+                var toRemove = view.Effects.FirstOrDefault(e => e is ToolTipEffect);
                 if (toRemove != null)
                 {
                     view.Effects.Remove(toRemove);
@@ -277,11 +273,5 @@ namespace Plugin.myToolTip
         OnClick,
     }
 
-    class ControlTooltipEffect : RoutingEffect
-    {
-        public ControlTooltipEffect() : base($"Plugin.{nameof(ToolTipEffect)}")
-        {
-
-        }
-    }
+    // public class ControlTooltipEffect() : RoutingEffect($"Plugin.{nameof(ToolTipEffect)}");
 }
