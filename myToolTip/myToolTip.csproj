@@ -1,62 +1,105 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
-
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 	<PropertyGroup>
 		<!--Work around so the conditions work below-->
-		<TargetFrameworks>netstandard2.0;Xamarin.iOS10;MonoAndroid90;MonoAndroid10.0</TargetFrameworks>
-		<TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">$(TargetFrameworks);uap10.0.16299;</TargetFrameworks>
-		<!--Feel free to add as many targets as you need below
-    netstandard1.0;netstandard2.0;MonoAndroid90;Xamarin.iOS10;uap10.0.16299;Xamarin.TVOS10;Xamarin.WatchOS10;Xamarin.Mac20;Tizen40
-    For UWP update the version number with a version number you have installed.
-    -->
-		<AssemblyName>Plugin.myToolTip</AssemblyName>
-		<RootNamespace>Plugin.myToolTip</RootNamespace>
+		<TargetFrameworks>net8.0;net8.0-android;net8.0-ios;net8.0-maccatalyst;</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+		<AssemblyName>myToolTip.Maui</AssemblyName>
+		<RootNamespace>myToolTip.Maui</RootNamespace>
 		<PackageId>Plugin.myToolTip</PackageId>
-
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-		<Version>1.0.0.7</Version>
- 
+		<Version>2.1.0.0</Version>
 		<PackOnBuild>true</PackOnBuild>
 		<NeutralLanguage>en</NeutralLanguage>
 		<LangVersion>default</LangVersion>
 		<DefineConstants>$(DefineConstants);</DefineConstants>
-
 		<UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
 		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-
 		<LangVersion>latest</LangVersion>
-		<DebugType>portable</DebugType>
-		 
 		<PackageProjectUrl>https://github.com/EmilAlipiev/myToolTip</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/EmilAlipiev/myToolTip</RepositoryUrl>
 		<PackageReleaseNotes>Text property changed binding fixed for UWP and Android</PackageReleaseNotes>
-		<PackageIconUrl></PackageIconUrl>
-		<PackageTags>xamarin, windows, ios, android, xamarin.forms, plugin, myToolTip</PackageTags>
-
-		<Title>myToolTip Plugin for Xamarin.Forms</Title>
-		<Summary>Xamarin.Forms and UWP plugin to In-App Billing.</Summary>
-		<Description>Xamarin Forms tooltip plugin for Android, IOS, TVOS and UWP.</Description>
-
-
+		<PackageIconUrl>
+		</PackageIconUrl>
+		<PackageTags>Maui, windows, ios, android, plugin, myToolTip, Xamarin</PackageTags>
+		<Title>myToolTip Plugin for Maui</Title>
+		<Summary>Maui and UWP plugin to In-App Billing.</Summary>
+		<Description>Maui tooltip plugin for Android, IOS, MacOs and UWP.</Description>
 		<Authors>Emil Alipiev</Authors>
 		<Owners>EmilAlipiev</Owners>
-		<Copyright>Copyright 2020</Copyright>
-
+		<Copyright>Copyright 2025</Copyright>
 		<!--When built in 2019 will remove extra references on pack-->
 		<DisableExtraReferences>true</DisableExtraReferences>
-
+		<UseMaui>True</UseMaui>
+		<OutputType>Library</OutputType>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<SingleProject>true</SingleProject>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+ 
 	</PropertyGroup>
-
 	<PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
-		<DebugSymbols>true</DebugSymbols>
 		<GenerateDocumentationFile>false</GenerateDocumentationFile>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)'=='Release' ">
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
-	
+<!--	<PropertyGroup Condition=" '$(Configuration)'=='Release' And '$(OS)' == 'Windows_NT' ">-->
+<!--		&lt;!&ndash; sourcelink: Declare that the Repository URL can be published to NuSpec &ndash;&gt;-->
+<!--		<PublishRepositoryUrl>true</PublishRepositoryUrl>-->
+<!--		&lt;!&ndash; sourcelink: Embed source files that are not tracked by the source control manager to the PDB &ndash;&gt;-->
+<!--		<EmbedUntrackedSources>true</EmbedUntrackedSources>-->
+<!--		&lt;!&ndash; sourcelink: Include PDB in the built .nupkg &ndash;&gt;-->
+<!--		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>-->
+<!--	</PropertyGroup>-->
+	<ItemGroup>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="**\*.shared.cs" />
+		<Compile Update="Platforms\Android\myToolTip.android.cs">
+		  <SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Platforms\iOS\myToolTip.apple.cs">
+		  <SubType>Code</SubType>
+		</Compile>
+		<Compile Update="Platforms\MacCatalyst\myToolTip.apple.cs">
+		  <SubType>Code</SubType>
+		  <ExcludeFromCurrentConfiguration>true</ExcludeFromCurrentConfiguration>
+		</Compile>
+		<Compile Include="Platforms\iOS\myToolTip.cs">
+		  <SubType>Code</SubType>
+		  <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
+	</ItemGroup>
+	<!--	<ItemGroup Condition=" $(TargetFramework.StartsWith('uap10.0')) ">
+		<Compile Include="**\*.uwp.cs" />
+		 
+	</ItemGroup>-->
+	<ItemGroup Condition=" $(TargetFramework.Contains('-mac')) ">
+		<Compile Include="Platforms\MacCatalyst\myToolTip.cs">
+		  <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
+		</Compile>
+	</ItemGroup>
+	<!--	<ItemGroup Condition=" $(TargetFramework.Contains('-tvos')) ">
+		<Compile Include="**\*.apple.cs" />
+	</ItemGroup>-->
+	<ItemGroup Condition=" $(TargetFramework.Contains('-android')) ">
+		<Compile Include="Platforms\Android\myToolTip.cs">
+		  <ExcludeFromCurrentConfiguration>false</ExcludeFromCurrentConfiguration>
+		</Compile>
+	</ItemGroup>
+	<ItemGroup Condition=" $(TargetFramework.Contains('-windows')) ">
+		<Compile Include="**\*.uwp.cs" />
+	</ItemGroup>
 	<PropertyGroup Condition=" '$(Configuration)'=='Release' And '$(OS)' == 'Windows_NT' ">
 		<!-- sourcelink: Declare that the Repository URL can be published to NuSpec -->
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -65,65 +108,40 @@
 		<!-- sourcelink: Include PDB in the built .nupkg -->
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 	</PropertyGroup>
-	
-	<ItemGroup> 
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-	</ItemGroup>
-	
 	<ItemGroup>
-		<Compile Include="**\*.shared.cs" />
+		<None Include="Tooltip.png">
+			<Pack>True</Pack>
+			<PackagePath>
+			</PackagePath>
+		</None>
 	</ItemGroup>
-
-	<ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
+	  <PackageReference Include="EasyToolTip.Mau.ios" Version="1.0.1" />
 	</ItemGroup>
-
-	<ItemGroup Condition=" $(TargetFramework.StartsWith('uap10.0')) ">
-		<Compile Include="**\*.uwp.cs" />
-		<!--
-    If you need to add sdk references:
-     <SDKReference Include="WindowsMobile, Version=10.0.16299.0">
-      <Name>Windows Mobile Extensions for the UWP</Name>
-    </SDKReference>
-    -->
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-maccatalyst'">
+	  <PackageReference Include="EasyToolTip.Mau.ios" Version="1.0.1" />
 	</ItemGroup>
-
-	<ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
-		<Compile Include="**\*.android.cs" />
-		<PackageReference Include="XamarinAndroid.ToolTips">
-			<Version>1.0.3</Version>
-		</PackageReference>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
+	  <PackageReference Include="ToolTips.MauiAndroid" Version="2.0.0" />
 	</ItemGroup>
-
-	<ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
-		<Compile Include="**\*.apple.cs" />
-		<PackageReference Include="EasyTipView">
-			<Version>1.0.1</Version>
-		</PackageReference>
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Xamarin.Forms" Version="4.7.0.1142" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Include="Tooltip.png">
-	    <Pack>True</Pack>
-	    <PackagePath></PackagePath>
-	  </None>
-	</ItemGroup>
-
-	 
 	<PropertyGroup>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
-
 	<PropertyGroup>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageIcon>Tooltip.png</PackageIcon>
 	</PropertyGroup>
-	
+	<PropertyGroup>
+		<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-ios'))">10.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-tvos'))">10.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-maccatalyst'))">13.1</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-macos'))">10.14</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-android'))">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-windows10'))">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$(TargetFramework.Contains('-windows10'))">10.0.17763.0</TargetPlatformMinVersion>
+	</PropertyGroup>
 	<!--Additional item groups-->
 	<!--
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.TVOS')) ">
