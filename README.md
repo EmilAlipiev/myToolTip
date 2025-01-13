@@ -1,6 +1,6 @@
 # myToolTip
 
-Cross platform Xamarin forms tooltip works for IOS, Android and UWP. 
+Cross platform Maui tooltip works for IOS, Android and WinUI. Please use version 2.1.x for Maui. Version 1.x.x was Xamarin.Forms which should be no longer used.
 
 [![Nuget Package Deploy](https://github.com/EmilAlipiev/myToolTip/workflows/Nuget%20Package%20Deploy/badge.svg?branch=master)](https://www.nuget.org/packages/Plugin.myToolTip/)
 
